@@ -13,7 +13,7 @@ package com.mycompany.mavenproject1;
 public interface Example2 {
     boolean equals(Object other); // In Object
     int hashCode(); // In Object
-    int myMethod(); // Abstract.
+    int myMethod(); // Functional Method.
     default int myMethod2() {return myMethod();}
     static int myMethod3() {return 0;}
 }
