@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.mavenproject1;
+package com.richard.roda.lambda.stream;
 
 /**
  *
@@ -11,9 +11,9 @@ package com.mycompany.mavenproject1;
  */
 @FunctionalInterface // Optional
 public interface Example2 {
+    int myMethod(); // Functional Method.
     boolean equals(Object other); // In Object
     int hashCode(); // In Object
-    int myMethod(); // Functional Method.
     default int myMethod2() {return myMethod();}
     static int myMethod3() {return 0;}
 }
