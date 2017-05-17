@@ -5,7 +5,6 @@
  */
 package com.richardroda.example.unit.test.stream.fibonacci.builder;
 
-import com.richardroda.example.unit.test.stream.fibonacci.builder.Fibonacci;
 import java.math.BigInteger;
 import java.util.stream.Stream;
 import org.testng.Assert;
@@ -30,13 +29,19 @@ public class TestFibonacci implements Fibonacci.FibonacciBuilder {
     
     @Test
     public void testAll() {
+        System.out.print("Tested: ");
         int value = f.computeFibonacci(FIBONACCI_NUMBERS.length).intValue();
         Assert.assertEquals(value, FIBONACCI_NUMBERS[FIBONACCI_NUMBERS.length-1]);
+        System.out.println();
     }
 
     @Override
     public Stream<BigInteger[]> afterIterator(Stream<BigInteger[]> s) {
-        return s.peek(i -> Assert.assertEquals(FIBONACCI_NUMBERS[n++], i[1].intValue()));
+        return s.peek(i -> {
+            Assert.assertEquals(FIBONACCI_NUMBERS[n++], i[1].intValue());
+            System.out.print(i[1]);
+            System.out.print(", ");
+        });
     }
 
 

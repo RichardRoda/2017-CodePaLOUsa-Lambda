@@ -30,14 +30,18 @@ public class TestFibonacci implements Fibonacci.FibonacciDecorator {
     
     @Test
     public void testAll() {
+        System.out.print("Tested: ");
         int value = f.computeFibonacci(FIBONACCI_NUMBERS.length).intValue();
         Assert.assertEquals(value, FIBONACCI_NUMBERS[FIBONACCI_NUMBERS.length-1]);
+        System.out.println(FIBONACCI_NUMBERS[FIBONACCI_NUMBERS.length-1]);
     }
 
     @Override
     public UnaryOperator<BigInteger[]> decorateIterator(UnaryOperator<BigInteger[]> f) {
         return i -> {
             Assert.assertEquals(FIBONACCI_NUMBERS[n++], i[1].intValue());
+            System.out.print(i[1]);
+            System.out.print(", ");
             return f.apply(i);
         };
     }
