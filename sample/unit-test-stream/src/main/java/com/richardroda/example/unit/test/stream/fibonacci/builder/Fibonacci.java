@@ -15,6 +15,12 @@ import java.util.stream.Stream;
 public class Fibonacci {
     // builder which allows steps to be inserted into the stream.
     protected static interface FibonacciBuilder {
+        /**
+         * Allow for insertion of steps necessary for unit testing
+         * after the iterator is completed.
+         * @param s The stream.
+         * @return The stream, or a stream with steps added for unit testing.
+         */
         default Stream<BigInteger[]> afterIterator(Stream<BigInteger[]> s) 
         { return s; }
     }
@@ -22,7 +28,11 @@ public class Fibonacci {
     static final FibonacciBuilder DEFAULT = new FibonacciBuilder(){};    
     private FibonacciBuilder builder = DEFAULT;
     
-    static final BigInteger[] ONE = {BigInteger.ZERO,BigInteger.ONE};
+    /**
+     * Constant for the first two fibonacci numbers in the series.  Used as
+     * the seed for the fibonacci series.
+     */
+    static private final BigInteger[] ONE = {BigInteger.ZERO,BigInteger.ONE};
     
     /**
      * Compute the nth fibonacci number.
@@ -48,7 +58,7 @@ public class Fibonacci {
         System.out.println(f.computeFibonacci(10));
     }
     
-    protected void setBuilder(FibonacciBuilder builder) {
+     void setBuilder(FibonacciBuilder builder) {
         this.builder = builder == null ? DEFAULT : builder;
     }
 }

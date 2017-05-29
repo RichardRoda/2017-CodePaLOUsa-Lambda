@@ -16,6 +16,12 @@ import java.util.stream.Stream;
 public class Fibonacci {
     // builder which allows steps to be inserted into the stream.
     protected static interface FibonacciDecorator {
+        /**
+         * Allow for the decoration of the lambda that is used to generate
+         * the next fibonacci number.
+         * @param f lambda to calculate the next fibonacci number.
+         * @return f, or f decorated for unit testing.
+         */
         default UnaryOperator<BigInteger[]> decorateIterator(UnaryOperator<BigInteger[]> f) 
         { return f; }
     }
@@ -23,7 +29,11 @@ public class Fibonacci {
     static final FibonacciDecorator DEFAULT = new FibonacciDecorator(){};    
     private FibonacciDecorator decorator = DEFAULT;
     
-    static final BigInteger[] ONE = {BigInteger.ZERO,BigInteger.ONE};
+    /**
+     * Constant for the first two fibonacci numbers in the series.  Used as
+     * the seed for the fibonacci series.
+     */
+    static private final BigInteger[] ONE = {BigInteger.ZERO,BigInteger.ONE};
     
     /**
      * Compute the nth fibonacci number.
@@ -49,7 +59,7 @@ public class Fibonacci {
         System.out.println(f.computeFibonacci(10));
     }
     
-    protected void setBuilder(FibonacciDecorator decorator) {
+    void setBuilder(FibonacciDecorator decorator) {
         this.decorator = decorator == null ? DEFAULT : decorator;
     }
 }
